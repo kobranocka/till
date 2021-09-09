@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "price":4,
+        "name":"Heineken",
+        "isAlcoholic":true,
+        "isEnabled":true
+    },
+    {
+        "id":2,
+        "price":5,
+        "name":"Guinness",
+        "isAlcoholic":true,
+        "isEnabled":true
+    },
+    {
+        "id":3,
+        "price":6,
+        "name":"Carlsberg",
+        "isAlcoholic":true,
+        "isEnabled":true
+    }
+]
