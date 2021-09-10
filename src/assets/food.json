@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "price":10,
+        "name":"Pie",
+        "isAlcoholic":false,
+        "isEnabled":true
+    },
+    {
+        "id":2,
+        "price":15,
+        "name":"Steak",
+        "isAlcoholic":false,
+        "isEnabled":true
+    },
+    {
+        "id":3,
+        "price":3,
+        "name":"Chips",
+        "isAlcoholic":false,
+        "isEnabled":true
+    }
+]
