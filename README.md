@@ -1,1 +1,1 @@
-# till
+# simple till system
