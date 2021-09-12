@@ -29,7 +29,21 @@ export default {
             this.billItems.push(item);
             console.log(item.name)
         })
-    }
+        // TEST
+        this.emitter.on("paymentReceived", (payment)=>{
+            // reset total
+            if(payment == "max" || this.orderTotal - payment <= 0){
+                this.orderTotal = 0;
+                this.billItems.length = 0;
+            }else{
+                this.orderTotal -= payment;
+                let pay = {"name": "payment", "price": payment*(-1)};
+                this.billItems.push(pay);
+            }
+            // if total > 0 show payment on the list, else reset the list
+        })
+        // TEST
+    },
 }
 </script>
 

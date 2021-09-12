@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "till",
-=======
-  "name": "till-copy",
->>>>>>> e799f040f9551f5fe66320bde38df26fef1c2988
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,10 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-<<<<<<< HEAD
-=======
     "mitt": "^3.0.0",
->>>>>>> e799f040f9551f5fe66320bde38df26fef1c2988
     "vue": "^3.0.0"
   },
   "devDependencies": {

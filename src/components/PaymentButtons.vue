@@ -1,9 +1,9 @@
 <template>
     <section class="payments">
-        <button>Cash</button>
-        <button>Card</button>
-        <button>£10</button>
-        <button>£20</button>
+        <button v-on:click="payment('max')">Cash</button>
+        <button v-on:click="payment('max')">Card</button>
+        <button v-on:click="payment(10)">£10</button>
+        <button v-on:click="payment(20)">£20</button>
     </section>
 </template>
 
@@ -14,8 +14,16 @@ export default {
         return{
   
     };
+    },
+    // TEST
+    methods:{
+        payment(amount){
+            this.emitter.emit("paymentReceived", amount);
+        }
     }
+    // TEST
 }
+
 </script>
 
 <style scoped>
