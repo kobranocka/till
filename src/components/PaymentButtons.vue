@@ -1,9 +1,9 @@
 <template>
     <section class="payments">
-        <button v-on:click="payment('max')">Cash</button>
-        <button v-on:click="payment('max')">Card</button>
-        <button v-on:click="payment(10)">£10</button>
-        <button v-on:click="payment(20)">£20</button>
+        <button v-on:click="payment('max', 'cash')">Cash</button>
+        <button v-on:click="payment('max', 'card')">Card</button>
+        <button v-on:click="payment(10, 'cash')">£10</button>
+        <button v-on:click="payment(20, 'cash')">£20</button>
     </section>
 </template>
 
@@ -17,7 +17,12 @@ export default {
     },
     // TEST
     methods:{
-        payment(amount){
+        payment(amount, method){
+            if(method == "card"){
+                alert("paid by card");
+            }else if(amount == 'max'){
+                alert("paid by cash");
+            }
             this.emitter.emit("paymentReceived", amount);
         }
     }

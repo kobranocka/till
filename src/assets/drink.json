@@ -4,20 +4,20 @@
         "price":4,
         "name":"Heineken",
         "isAlcoholic":true,
-        "isEnabled":true
+        "isEnabled":false
     },
     {
         "id":2,
         "price":5,
         "name":"Guinness",
         "isAlcoholic":true,
-        "isEnabled":true
+        "isEnabled":false
     },
     {
         "id":3,
         "price":6,
         "name":"Carlsberg",
         "isAlcoholic":true,
-        "isEnabled":true
+        "isEnabled":false
     }
 ]

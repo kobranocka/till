@@ -1,18 +1,17 @@
 <template>
   <div class="drinks-table">
-
     <button class="item-type-button" v-on:click="drinkSelected= false">Food</button>
     <button class="item-type-button" v-on:click="drinkSelected = true">Drink</button>
 
     <ul class="product-group"  v-show ="drinkSelected">
       <li class = "product-item" v-for="drink in drinks" :key="drink.id">
-        <button class = "product-button" v-on:click="updateTotal(drink)">{{drink.name}}</button>
+        <button class = "product-button" v-on:click="updateTotal(drink, 'drink')" :disabled="!drink.isEnabled">{{drink.name}}</button>
       </li>
     </ul>
 
       <ul class="product-group" v-show="!drinkSelected">
       <li class = "product-item" v-for="food in foods" :key="food.id">
-        <button class = "product-button" v-on:click="updateTotal(food)">{{food.name}}</button>
+        <button class = "product-button" v-on:click="updateTotal(food, 'food')">{{food.name}}</button>
       </li>
     </ul>
 
@@ -24,6 +23,7 @@
 
 let drinksData = require("../assets/drink.json");
 let foodData = require("../assets/food.json");
+let mult = 1;
 export default {
   name: 'DrinksTable',
   data(){
@@ -34,15 +34,24 @@ export default {
       drinkSelected: true
     };
   },
+  mounted(){
+    //TEST: on size selected, enable the choice of drinks and count their price by mult
+      this.emitter.on("sizeSelected", (multiply) =>{
+        mult = multiply;
+        // enable drinks
+        this.drinks.forEach(drink => drink.isEnabled = true);
+      })
+  },
   methods:{
-    
-    logPrice(price){
-      console.log(price);
-    },
-
-    updateTotal(item){
-      this.total += item.price;
-      this.emitter.emit("itemPressed", item);
+    updateTotal(item, type){
+      // update item's price field
+      let newItem = JSON.parse(JSON.stringify(item));
+      if(type == 'drink'){
+        newItem.price = newItem.price*mult;
+      }
+      this.total += newItem.price;
+      this.emitter.emit("itemPressed", newItem);
+      this.drinks.forEach(drink => drink.isEnabled = false);
     }
   }
 };
