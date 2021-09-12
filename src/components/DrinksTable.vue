@@ -6,13 +6,13 @@
 
     <ul class="product-group"  v-show ="drinkSelected">
       <li class = "product-item" v-for="drink in drinks" :key="drink.id">
-        <button class = "product-button" v-on:click="total += drink.price">{{drink.name}}</button>
+        <button class = "product-button" v-on:click="updateTotal(drink)">{{drink.name}}</button>
       </li>
     </ul>
 
       <ul class="product-group" v-show="!drinkSelected">
       <li class = "product-item" v-for="food in foods" :key="food.id">
-        <button class = "product-button" v-on:click="total += food.price">{{food.name}}</button>
+        <button class = "product-button" v-on:click="updateTotal(food)">{{food.name}}</button>
       </li>
     </ul>
 
@@ -24,15 +24,13 @@
 
 let drinksData = require("../assets/drink.json");
 let foodData = require("../assets/food.json");
-let runningTotal = 0;
-
 export default {
   name: 'DrinksTable',
   data(){
     return{
       drinks: drinksData,
       foods: foodData,
-      total: runningTotal,
+      total: 0,
       drinkSelected: true
     };
   },
@@ -40,7 +38,11 @@ export default {
     
     logPrice(price){
       console.log(price);
-      console.log(runningTotal);
+    },
+
+    updateTotal(item){
+      this.total += item.price;
+      this.emitter.emit("itemPressed", item);
     }
   }
 };
