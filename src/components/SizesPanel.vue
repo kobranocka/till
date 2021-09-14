@@ -19,7 +19,8 @@ export default {
     name: 'SizesPanel',
     data(){
         return{
-            sizes: "",
+            choices: sizesChoices,
+            sizes: [],
     };
     },
     methods:{
@@ -30,7 +31,8 @@ export default {
 
     mounted(){
         this.emitter.on('category', sizeCategory => {
-            this.sizes = sizesChoices.sizeCategory;
+            this.sizes = sizesChoices[sizeCategory];
+            console.table(this.sizes);
             console.log(sizeCategory);
             });
     }

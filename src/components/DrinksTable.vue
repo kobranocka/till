@@ -16,10 +16,10 @@
       <button class="subcatagory-button Desserts" v-on:click="choseCategory('desserts')">Desserts</button>
     </section>
 
-    <ul class="product-group">
-      <li class = "product-item" v-for="item in chosenCategory.products" :key="item.id">
-        <button class = "product-button" v-on:click="updateTotal(item, 'drink')">{{item.name}}</button>
-      </li>
+    <ul>
+      <li class = "product-item" v-for="item in category.products" :key="item.id"> 
+          <button class = "product-button">{{item.name}}</button>
+      </li> 
     </ul>
 
   </div>
@@ -33,7 +33,6 @@ let vodkaData = require("../assets/vodka.json");
 let starterData = require("../assets/starters.json");
 let mainsData = require("../assets/mains.json");
 let dessertData = require("../assets/desserts.json");
-let chosenCategory = beerData;
 
 let mult = 1;
 
@@ -42,7 +41,8 @@ export default {
   data(){
     return{
       total: 0,
-      drinkSelected: true
+      drinkSelected: true,
+      category: beerData
     };
   },
   mounted(){
@@ -68,31 +68,30 @@ export default {
       
       switch(cat){
         case 'beer':
-          chosenCategory = beerData;
+          this.category = beerData;
         break;
 
         case 'vodka':
-          chosenCategory = vodkaData;
+          this.category = vodkaData;
         break;
 
         case 'wine':
-          chosenCategory = wineData;
+          this.category = wineData;
         break;
 
         case 'starters':
-          chosenCategory = starterData;
+          this.category = starterData;
         break;
 
         case 'mains':
-          chosenCategory = mainsData;
+          this.category = mainsData;
         break;
 
         case 'desserts':
-          chosenCategory = dessertData;
+          this.category = dessertData;
         break;
       }
-      console.log(chosenCategory.sizes);
-      this.emitter.emit("category", chosenCategory.sizes);
+      this.emitter.emit("category", this.category.sizes);
     }
   }
 };
