@@ -1,0 +1,41 @@
+
+{
+    "sizes": "wines",
+    "products": [
+        {
+            "id":1,
+            "price":4,
+            "name":"Chenin Blanc",
+            "isAlcoholic":true,
+            "isEnabled":false
+        },
+        {
+            "id":2,
+            "price":5,
+            "name":"Pinot Grigio",
+            "isAlcoholic":true,
+            "isEnabled":false
+        },
+        {
+            "id":3,
+            "price":6,
+            "name":"Sauvignon Blanc",
+            "isAlcoholic":true,
+            "isEnabled":false
+        },
+        {
+            "id":4,
+            "price":6,
+            "name":"Picpoul",
+            "isAlcoholic":true,
+            "isEnabled":false
+        },
+        {
+            "id":4,
+            "price":6,
+            "name":"Procecco",
+            "isAlcoholic":true,
+            "isEnabled":false
+        }
+    ]
+}

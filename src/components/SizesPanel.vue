@@ -1,26 +1,38 @@
 <template>
     <ul>
         <li v-for="size in sizes" :key="size.size">
-            <button v-on:click="sizeSelected(size)">{{size.size}}</button>
+            <button v-on:click="sizeSelected(size)">{{size}}</button>
         </li>
     </ul>
 </template>
 
 <script>
-let sizes = [
-    {size: "pint", mult: "1"},
-    {size: "half-pint", mult: "0.5"}];
+
+let sizesChoices = {
+    pints: ["pint", "Half Pint", "Shandy"],
+    wines: ["125ml", "175ml", "250ml"],
+    spirits: ["25ml", "50ml", "Bottle"]
+}
+
+    
 export default {
     name: 'SizesPanel',
     data(){
         return{
-            sizes:sizes
+            sizes: "",
     };
     },
     methods:{
         sizeSelected(size){
             this.emitter.emit("sizeSelected", size.mult);
         }
+    },
+
+    mounted(){
+        this.emitter.on('category', sizeCategory => {
+            this.sizes = sizesChoices.sizeCategory;
+            console.log(sizeCategory);
+            });
     }
 }
 

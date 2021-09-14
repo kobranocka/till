@@ -1,0 +1,34 @@
+
+{
+    "sizes": "spirits",
+    "products": [
+        {
+            "id":1,
+            "price":4,
+            "name":"Ketal One",
+            "isAlcoholic":true,
+            "isEnabled":false
+        },
+        {
+            "id":2,
+            "price":6,
+            "name":"Sipsmith",
+            "isAlcoholic":true,
+            "isEnabled":false
+        },
+        {
+            "id":3,
+            "price":6,
+            "name":"Ciroc",
+            "isAlcoholic":true,
+            "isEnabled":false
+        },
+        {
+            "id":3,
+            "price":6,
+            "name":"Ketal One Grapefruit & Rose",
+            "isAlcoholic":true,
+            "isEnabled":false
+        }
+    ]
+}

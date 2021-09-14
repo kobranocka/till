@@ -3,33 +3,52 @@
     <button class="item-type-button" v-on:click="drinkSelected= false">Food</button>
     <button class="item-type-button" v-on:click="drinkSelected = true">Drink</button>
 
-    <ul class="product-group"  v-show ="drinkSelected">
-      <li class = "product-item" v-for="drink in drinks" :key="drink.id">
-        <button class = "product-button" v-on:click="updateTotal(drink, 'drink')" :disabled="!drink.isEnabled">{{drink.name}}</button>
-      </li>
-    </ul>
+    <section v-show="drinkSelected" class="subcatagory drinks">
+      <button class="subcatagory-button beer" v-on:click="choseCategory('beer')">Beer</button>
+      <button class="subcatagory-button wine" v-on:click="choseCategory('wine')">Wine</button>
+      <button class="subcatagory-button vodka" v-on:click="choseCategory('vodka')">Vodka</button>
+    </section>
 
-      <ul class="product-group" v-show="!drinkSelected">
-      <li class = "product-item" v-for="food in foods" :key="food.id">
-        <button class = "product-button" v-on:click="updateTotal(food, 'food')">{{food.name}}</button>
-      </li>
-    </ul>
 
-    <p>Running total is: {{total}}</p>
+    <section v-show="!drinkSelected" class="subcatagory food">
+      <button class="subcatagory-button Starters" v-on:click="choseCategory('starters')">Starters</button>
+      <button class="subcatagory-button Mains" v-on:click="choseCategory('mains')">Mains</button>
+      <button class="subcatagory-button Desserts" v-on:click="choseCategory('desserts')">Desserts</button>
+    </section>
+
+    <!-- <ul class="product-group">
+      <li class = "product-item" v-for="item in category.products" :key="item.id">
+        <button class = "product-button" v-on:click="updateTotal(item, 'drink')">{{item.name}}</button>
+      </li>
+    </ul> -->
+
   </div>
 </template>
 
 <script>
 
-let drinksData = require("../assets/drink.json");
-let foodData = require("../assets/food.json");
+let beerData = require("../assets/beer.json");
+let wineData = require("../assets/wine.json");
+let vodkaData = require("../assets/vodka.json");
+let starterData = require("../assets/starters.json");
+let mainsData = require("../assets/mains.json");
+let dessertData = require("../assets/desserts.json");
+let chosenCategory = null;
+
 let mult = 1;
+
 export default {
   name: 'DrinksTable',
   data(){
     return{
-      drinks: drinksData,
-      foods: foodData,
+      beers: beerData,
+      wines: wineData,
+      vodkas: vodkaData,
+      starters: starterData,
+      mains: mainsData,
+      desserts: dessertData,
+      category: chosenCategory,
+
       total: 0,
       drinkSelected: true
     };
@@ -51,7 +70,36 @@ export default {
       }
       this.total += newItem.price;
       this.emitter.emit("itemPressed", newItem);
-      this.drinks.forEach(drink => drink.isEnabled = false);
+      // this.drinks.forEach(drink => drink.isEnabled = false);
+    },
+    choseCategory(cat){
+      
+      switch(cat){
+        case 'beer':
+          this.category = this.beer;
+        break;
+
+        case 'vodka':
+          this.category = this.vodka;
+        break;
+
+        case 'wine':
+          this.category = this.wine;
+        break;
+
+        case 'starters':
+          this.category = this.starters;
+        break;
+
+        case 'mains':
+          this.category = this.mains;
+        break;
+
+        case 'desserts':
+          this.category = this.desserts;
+        break;
+      }
+      this.emitter.emit("category", this.category.sizes);
     }
   }
 };
@@ -63,7 +111,6 @@ export default {
   background: #e3e3e3;
   display: flex;
   flex-direction: column;
-
 }
 
 .product-group{

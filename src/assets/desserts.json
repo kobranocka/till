@@ -1,0 +1,21 @@
+
+{
+    "sizes": "none",
+    "products": [
+        {
+            "id":1,
+            "price":4,
+            "name":"brownie"
+        },
+        {
+            "id":2,
+            "price":5,
+            "name":"apple pie"
+        },
+        {
+            "id":3,
+            "price":6,
+            "name":"smoothie"
+        }
+    ]
+}

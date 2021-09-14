@@ -1,0 +1,22 @@
+
+
+{
+    "sizes": "none",
+    "products": [
+        {
+            "id":1,
+            "price":4,
+            "name":"chips"
+        },
+        {
+            "id":2,
+            "price":5,
+            "name":"idk??"
+        },
+        {
+            "id":3,
+            "price":6,
+            "name":"what do you have for starters :/"
+        }
+    ]
+}

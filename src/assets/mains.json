@@ -1,0 +1,23 @@
+
+{
+    "sizes": "none",
+    "products":
+        [
+            {
+                "id":1,
+                "price":10,
+                "name":"Fish"
+            },
+            {
+                "id":2,
+                "price":15,
+                "name":"Steak"
+            },
+            {
+                "id":3,
+                "price":3,
+                "name":"Chips"
+            }
+        ]
+    
+}
