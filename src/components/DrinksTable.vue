@@ -16,11 +16,11 @@
       <button class="subcatagory-button Desserts" v-on:click="choseCategory('desserts')">Desserts</button>
     </section>
 
-    <!-- <ul class="product-group">
+    <ul class="product-group">
       <li class = "product-item" v-for="item in chosenCategory.products" :key="item.id">
         <button class = "product-button" v-on:click="updateTotal(item, 'drink')">{{item.name}}</button>
       </li>
-    </ul> -->
+    </ul>
 
   </div>
 </template>
@@ -33,7 +33,7 @@ let vodkaData = require("../assets/vodka.json");
 let starterData = require("../assets/starters.json");
 let mainsData = require("../assets/mains.json");
 let dessertData = require("../assets/desserts.json");
-let chosenCategory = "";
+let chosenCategory = beerData;
 
 let mult = 1;
 
