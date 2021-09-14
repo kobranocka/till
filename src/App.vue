@@ -1,26 +1,17 @@
 <template>
-  <div class="till-wrapper">
-    <Order class="order"/>
-    <SizesPanel class="sizes"/>
-    <DrinksTable class="drinks-table"/>
-    <PaymentButtons class="payments"/>
-  </div>
+  <LayoutGrid/>
 </template>
 
 <script>
-import DrinksTable from './components/DrinksTable.vue';
-import PaymentButtons from './components/PaymentButtons.vue';
-import Order from './components/Order.vue';
-import SizesPanel from './components/SizesPanel.vue';
+
+import LayoutGrid from './components/LayoutGrid.vue'
 
 export default {
   name: 'App',
-  components: {
-    DrinksTable,
-    PaymentButtons,
-    Order,
-    SizesPanel
+  components:{
+    LayoutGrid
   }
+
 }
 </script>
 
