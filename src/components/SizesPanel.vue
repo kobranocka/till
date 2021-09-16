@@ -9,7 +9,7 @@
 <script>
 
 let sizesChoices = {
-    pints: ["pint", "Half Pint", "Shandy"],
+    pints: ["Pint", "Half Pint", "Shandy"],
     wines: ["125ml", "175ml", "250ml"],
     spirits: ["25ml", "50ml", "Bottle"]
 }

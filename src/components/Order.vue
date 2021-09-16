@@ -19,7 +19,7 @@ export default {
     data(){
         return{
             orderTotal: 0,
-            billItems: []
+            billItems: [],
         }
     },
 

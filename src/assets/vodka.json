@@ -5,6 +5,7 @@
     "products": [
         {
             "id":1,
+            "prices":{"25ml":4, "50ml":7, "Bottle":12},
             "price":4,
             "name":"Ketal One",
             "isAlcoholic":true,
@@ -12,6 +13,7 @@
         },
         {
             "id":2,
+            "prices":{"25ml":4, "50ml":7, "Bottle":12},
             "price":6,
             "name":"Sipsmith",
             "isAlcoholic":true,
@@ -19,6 +21,7 @@
         },
         {
             "id":3,
+            "prices":{"25ml":4, "50ml":7, "Bottle":12},
             "price":6,
             "name":"Ciroc",
             "isAlcoholic":true,
@@ -26,6 +29,7 @@
         },
         {
             "id":3,
+            "prices":{"25ml":4, "50ml":7, "Bottle":12},
             "price":6,
             "name":"Ketal One Grapefruit & Rose",
             "isAlcoholic":true,

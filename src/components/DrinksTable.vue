@@ -1,6 +1,6 @@
 <template>
   <div class="drinks-table">
-    <button class="item-type-button" v-on:click="drinkSelected= false" :disabled="sizeIsClicked">Food</button>
+    <button class="item-type-button" v-on:click="drinkSelected= false">Food</button>
     <button class="item-type-button" v-on:click="drinkSelected = true">Drink</button>
 
     <section v-show="drinkSelected" class="subcatagory drinks">
@@ -43,13 +43,11 @@ export default {
       drinkSelected: true,
       category: beerData,
       // keeping track of whether size is clicked
-      sizeIsClicked: false,
       pickedSize: null
     };
   },
   mounted(){
       this.emitter.on("sizeSelected", (size) =>{
-        this.isSizeSelected = true;
         this.pickedSize = size;
         // disable all items from other drinks categories while size is selected
         drinksData.forEach(data => data.products.forEach(item => item.isEnabled = false));
@@ -88,20 +86,14 @@ export default {
       this.emitter.emit("category", this.category.sizes);
     },
     choseProduct(chosenProduct){
-      let currentPrice = 0;
       if(this.category.type=="drink"){
         this.category.products.forEach(item => item.isEnabled = false);
-        // DOESN'T WORK!!! -- it doesn't even see this as an array
-        console.log(chosenProduct.price[0]);
-        currentPrice = chosenProduct.price[this.pickedSize];
-      }else{
-        currentPrice = chosenProduct.price;
+        chosenProduct.price = chosenProduct.prices[this.pickedSize];
       }
-      this.total += currentPrice;
+      this.total += chosenProduct.price;
       this.emitter.emit("itemPressed", chosenProduct);
       // resetting - selected size is not clicked or valid anymore
-      this.sizeIsClicked = false;
-      this.pickedSize = null;
+      //this.pickedSize = null;
     }
   }
 };
