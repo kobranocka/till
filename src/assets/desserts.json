@@ -1,21 +1,25 @@
 
 {
+    "type":"food",
     "sizes": "none",
     "products": [
         {
             "id":1,
             "price":4,
-            "name":"brownie"
+            "name":"brownie",
+            "isEnabled": true
         },
         {
             "id":2,
             "price":5,
-            "name":"apple pie"
+            "name":"apple pie",
+            "isEnabled": true
         },
         {
             "id":3,
             "price":6,
-            "name":"smoothie"
+            "name":"smoothie",
+            "isEnabled": true
         }
     ]
 }

@@ -14,7 +14,6 @@ let sizesChoices = {
     spirits: ["25ml", "50ml", "Bottle"]
 }
 
-    
 export default {
     name: 'SizesPanel',
     data(){
@@ -25,15 +24,13 @@ export default {
     },
     methods:{
         sizeSelected(size){
-            this.emitter.emit("sizeSelected", size.mult);
+            this.emitter.emit("sizeSelected", size);
         }
     },
 
     mounted(){
         this.emitter.on('category', sizeCategory => {
             this.sizes = sizesChoices[sizeCategory];
-            console.table(this.sizes);
-            console.log(sizeCategory);
             });
     }
 }

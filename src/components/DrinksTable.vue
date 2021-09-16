@@ -1,6 +1,6 @@
 <template>
   <div class="drinks-table">
-    <button class="item-type-button" v-on:click="drinkSelected= false">Food</button>
+    <button class="item-type-button" v-on:click="drinkSelected= false" :disabled="sizeIsClicked">Food</button>
     <button class="item-type-button" v-on:click="drinkSelected = true">Drink</button>
 
     <section v-show="drinkSelected" class="subcatagory drinks">
@@ -18,7 +18,7 @@
 
     <ul>
       <li class = "product-item" v-for="item in category.products" :key="item.id"> 
-          <button class = "product-button">{{item.name}}</button>
+          <button class = "product-button" :disabled="!item.isEnabled" v-on:click='choseProduct(item)'>{{item.name}}</button>
       </li> 
     </ul>
 
@@ -33,8 +33,7 @@ let vodkaData = require("../assets/vodka.json");
 let starterData = require("../assets/starters.json");
 let mainsData = require("../assets/mains.json");
 let dessertData = require("../assets/desserts.json");
-
-let mult = 1;
+let drinksData = [beerData, wineData, vodkaData];
 
 export default {
   name: 'DrinksTable',
@@ -42,30 +41,25 @@ export default {
     return{
       total: 0,
       drinkSelected: true,
-      category: beerData
+      category: beerData,
+      // keeping track of whether size is clicked
+      sizeIsClicked: false,
+      pickedSize: null
     };
   },
   mounted(){
-    //TEST: on size selected, enable the choice of drinks and count their price by mult
-      this.emitter.on("sizeSelected", (multiply) =>{
-        mult = multiply;
-        // enable drinks
-        this.drinks.forEach(drink => drink.isEnabled = true);
+      this.emitter.on("sizeSelected", (size) =>{
+        this.isSizeSelected = true;
+        this.pickedSize = size;
+        // disable all items from other drinks categories while size is selected
+        drinksData.forEach(data => data.products.forEach(item => item.isEnabled = false));
+        this.category.products.forEach(item => item.isEnabled = true);
+        // disable food button
+        this.sizeIsClicked = true;
       })
   },
   methods:{
-    updateTotal(item, type){
-      // update item's price field
-      let newItem = JSON.parse(JSON.stringify(item));
-      if(type == 'drink'){
-        newItem.price = newItem.price*mult;
-      }
-      this.total += newItem.price;
-      this.emitter.emit("itemPressed", newItem);
-      // this.drinks.forEach(drink => drink.isEnabled = false);
-    },
-    choseCategory(cat){
-      
+    choseCategory(cat){ 
       switch(cat){
         case 'beer':
           this.category = beerData;
@@ -92,6 +86,22 @@ export default {
         break;
       }
       this.emitter.emit("category", this.category.sizes);
+    },
+    choseProduct(chosenProduct){
+      let currentPrice = 0;
+      if(this.category.type=="drink"){
+        this.category.products.forEach(item => item.isEnabled = false);
+        // DOESN'T WORK!!! -- it doesn't even see this as an array
+        console.log(chosenProduct.price[0]);
+        currentPrice = chosenProduct.price[this.pickedSize];
+      }else{
+        currentPrice = chosenProduct.price;
+      }
+      this.total += currentPrice;
+      this.emitter.emit("itemPressed", chosenProduct);
+      // resetting - selected size is not clicked or valid anymore
+      this.sizeIsClicked = false;
+      this.pickedSize = null;
     }
   }
 };

@@ -1,5 +1,6 @@
 
 {
+    "type":"drink",
     "sizes": "wines",
     "products": [
         {

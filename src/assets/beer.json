@@ -1,10 +1,11 @@
 
 {
+    "type":"drink",
     "sizes": "pints",
     "products": [
         {
             "id":1,
-            "price":4,
+            "price":[{"pint":5}, {"Half Pint":3}, {"Shandy":4}],
             "name":"Heineken",
             "isAlcoholic":true,
             "isEnabled":false

@@ -24,6 +24,7 @@ export default {
     },
 
     mounted(){
+        // item is received, need to update the price here too!
         this.emitter.on("itemPressed", (item)=>{
             this.orderTotal += item.price;
             this.billItems.push(item);
