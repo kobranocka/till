@@ -24,16 +24,21 @@ export default {
     },
 
     mounted(){
-        // item is received, need to update the price here too!
+        // called when item is selected
         this.emitter.on("itemPressed", (item)=>{
-            this.orderTotal += item.price;
-            this.billItems.push(item);
+            // create a copy of item and push it to the list
+            let copiedItem = Object.assign({}, item);
+            this.orderTotal += copiedItem.price;
+            this.billItems.push(copiedItem);
         })
+        // called when payment is made
         this.emitter.on("paymentReceived", (payment)=>{
+            // if card/cash payments are made in full or amount is bigger than asking price
             if(payment == "max" || this.orderTotal - payment <= 0){
                 this.orderTotal = 0;
                 this.billItems.length = 0;
             }else{
+                // if it's a partial payment
                 this.orderTotal -= payment;
                 let pay = {"name": "payment", "price": payment*(-1)};
                 this.billItems.push(pay);

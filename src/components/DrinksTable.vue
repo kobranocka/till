@@ -42,18 +42,17 @@ export default {
       total: 0,
       drinkSelected: true,
       category: beerData,
-      // keeping track of whether size is clicked
+      // keeping track of selected size
       pickedSize: null
     };
   },
   mounted(){
+    // the client chose a size
       this.emitter.on("sizeSelected", (size) =>{
         this.pickedSize = size;
         // disable all items from other drinks categories while size is selected
         drinksData.forEach(data => data.products.forEach(item => item.isEnabled = false));
         this.category.products.forEach(item => item.isEnabled = true);
-        // disable food button
-        this.sizeIsClicked = true;
       })
   },
   methods:{
@@ -85,15 +84,17 @@ export default {
       }
       this.emitter.emit("category", this.category.sizes);
     },
+    // called when an item is clicked
     choseProduct(chosenProduct){
-      if(this.category.type=="drink"){
+      if(this.drinkSelected){
+        // disable all drinks again bc size is not selected anymore
         this.category.products.forEach(item => item.isEnabled = false);
+        // find the right price of the item
         chosenProduct.price = chosenProduct.prices[this.pickedSize];
       }
+      // update total and inform about the changes
       this.total += chosenProduct.price;
       this.emitter.emit("itemPressed", chosenProduct);
-      // resetting - selected size is not clicked or valid anymore
-      //this.pickedSize = null;
     }
   }
 };

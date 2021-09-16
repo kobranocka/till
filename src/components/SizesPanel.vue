@@ -23,12 +23,14 @@ export default {
     };
     },
     methods:{
+        // called when size is selected
         sizeSelected(size){
             this.emitter.emit("sizeSelected", size);
         }
     },
 
     mounted(){
+        // when category is selected, update the displayed sizes options
         this.emitter.on('category', sizeCategory => {
             this.sizes = sizesChoices[sizeCategory];
             });
