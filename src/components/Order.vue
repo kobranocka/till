@@ -46,6 +46,8 @@ export default {
 .order{
     background: grey;
     position: relative;
+    width: 100%;
+    max-width: 100%;
 }
 
 .bill{

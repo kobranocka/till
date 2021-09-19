@@ -33,12 +33,6 @@ export default {
     flex-wrap: wrap;
   }
 
-  .order{
-    height: 90%;
-    display: inline-block;
-    flex: 1;
-  }
-
   .drinks-table{
     display: flex;
     flex: 2;
