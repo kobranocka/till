@@ -1,34 +1,13 @@
 <template>
   <div class="main-table">
 
+    <!-- The panel with sizes displayed -->
     <SizesPanel class="sizes"/>
 
+    <!-- Showing all products from a chosen category as buttons, disabled when it's a drink and size is not selected -->
     <span class = "product-item" v-for="item in category.products" :key="item.id">
         <button class = "product-button" :disabled="!item.isEnabled" v-on:click='choseProduct(item)'>{{item.name}}</button>
     </span>
-
-    <!-- <button class="item-type-button" v-on:click="drinkSelected= false">Food</button>
-    <button class="item-type-button" v-on:click="drinkSelected = true">Drink</button>
-
-    <section v-show="drinkSelected" class="subcatagory drinks">
-      <button class="subcatagory-button beer" v-on:click="choseCategory('beer')">Beer</button>
-      <button class="subcatagory-button wine" v-on:click="choseCategory('wine')">Wine</button>
-      <button class="subcatagory-button vodka" v-on:click="choseCategory('vodka')">Vodka</button>
-    </section>
-
-
-    <section v-show="!drinkSelected" class="subcatagory food">
-      <button class="subcatagory-button Starters" v-on:click="choseCategory('starters')">Starters</button>
-      <button class="subcatagory-button Mains" v-on:click="choseCategory('mains')">Mains</button>
-      <button class="subcatagory-button Desserts" v-on:click="choseCategory('desserts')">Desserts</button>
-    </section> -->
-
-    <!-- <ul>
-      <li class = "product-item" v-for="item in category.products" :key="item.id"> 
-          <button class = "product-button" :disabled="!item.isEnabled" v-on:click='choseProduct(item)'>{{item.name}}</button>
-      </li> 
-    </ul> -->
-
   </div>
 </template>
 
@@ -36,12 +15,14 @@
 
 import SizesPanel from './SizesPanel.vue';
 
+// loading data from JSON files
 let beerData = require("../assets/beer.json");
 let wineData = require("../assets/wine.json");
 let vodkaData = require("../assets/vodka.json");
 let starterData = require("../assets/starters.json");
 let mainsData = require("../assets/mains.json");
 let dessertData = require("../assets/desserts.json");
+// storing drinks together
 let drinksData = [beerData, wineData, vodkaData];
 
 export default {
@@ -49,36 +30,39 @@ export default {
   components: {SizesPanel},
   data(){
     return{
+      // keeping track of running total
       total: 0,
+      // keeping track of whether the category selected is a drink
       drinkSelected: true,
+      // keeping track of the current category
       category: beerData,
       // keeping track of selected size
       pickedSize: null
     };
   },
   mounted(){
-    // the client chose a size
+    // size has been chosen, received from SizesPanel component
       this.emitter.on("sizeSelected", (size) =>{
+        // updating the picked size
         this.pickedSize = size;
         // disable all items from other drinks categories while size is selected
         drinksData.forEach(data => data.products.forEach(item => item.isEnabled = false));
         this.category.products.forEach(item => item.isEnabled = true);
       })
 
-      // CHOSE DRINK/FOOD
+      // updating the main category (as food or drink) - received from Catagories component
       this.emitter.on("drinkSelected", (drinkSelected) => {
-        console.log("drink is selected" + drinkSelected);
         this.drinkSelected = drinkSelected;
       })
 
 
-      // CHOSE CATEGORY
+      // the subcategory was chosen - received from Categories component
       this.emitter.on("choseCategory", (category) => {
         this.choseCategory(category);
       })
   },
   methods:{
-    // THIS WILL HAVE TO BE MOVED AND EMITTED TO WHATEVER IS RESPONSIBLE FOR PICKING CATEGORIES
+    // run when subcategory change emit was caught
     choseCategory(cat){ 
       switch(cat){
         case 'beer':
@@ -105,8 +89,8 @@ export default {
           this.category = dessertData;
         break;
       }
+      // emit to be caught by SizesPanel to display the right sizes
       this.emitter.emit("category", this.category.sizes);
-      // END
     },
     // called when an item is clicked
     choseProduct(chosenProduct){
@@ -116,8 +100,9 @@ export default {
         // find the right price of the item
         chosenProduct.price = chosenProduct.prices[this.pickedSize];
       }
-      // update total and inform about the changes
+      // update total and inform Order component about the changes
       this.total += chosenProduct.price;
+      // emit to be caught by Order to update the price and display
       this.emitter.emit("itemPressed", chosenProduct);
     }
   }

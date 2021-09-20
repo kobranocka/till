@@ -23,14 +23,14 @@ export default {
     };
     },
     methods:{
-        // called when size is selected
+        // called when size is selected, to be caught by DrinksTable to process the price etc
         sizeSelected(size){
             this.emitter.emit("sizeSelected", size);
         }
     },
 
     mounted(){
-        // when category is selected, update the displayed sizes options
+        // when category is selected, update the displayed sizes options, emitted by DrinksTable component
         this.emitter.on('category', sizeCategory => {
             this.sizes = sizesChoices[sizeCategory];
             });

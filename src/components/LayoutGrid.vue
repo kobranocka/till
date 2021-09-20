@@ -4,21 +4,17 @@
           <HelpBar class="help-bar"/>
           <Order class="order"/>
           <Numpad class="numpad"/>
-        <!-- <SizesPanel class="sizes"/>
-        <DrinksTable class="drinks-table"/>
-        <PaymentButtons class="payments"/> -->
         </div>
 
         <div class="main">
-
+          <!-- show the items page - DrinksTable component -->
           <div v-show="productPageShown" class="product-page page">
               <DrinksTable class="main-table"/>
           </div>
-
+          <!-- show the items page - PaymentButton component -->
           <div v-show="!productPageShown" class="payment-page page">
               <PaymentButtons class="payments"/>
           </div>
-
 
           <Catagories class="categories"/>
   
@@ -48,11 +44,13 @@ export default {
 
   data(){
       return{
+        // keep track of the displayed page
         productPageShown: true
       }
   },
 
   mounted(){
+    // emit received from Catagories component when pay button is clicked, change the page display
     this.emitter.on("mainPageChange", page =>{
       if(page == "pay"){
         this.productPageShown = false;

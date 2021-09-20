@@ -18,13 +18,15 @@ export default {
     name: 'Order',
     data(){
         return{
+            // the running total
             orderTotal: 0,
+            // stacked items
             billItems: [],
         }
     },
 
     mounted(){
-        // called when item is selected
+        // called when item is selected, received from DrinksTable component
         this.emitter.on("itemPressed", (item)=>{
             // create a copy of item and push it to the list
             let copiedItem = Object.assign({}, item);

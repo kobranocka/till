@@ -27,21 +27,25 @@ export default {
 
     data(){
         return{
+          // keeping track of whether a drink is selected
           drinkSelected: true
         }
     },
 
     methods:{
+        // the sub-category was changes, emit is caught by DrinksTable component
         emitCategory(category){
             this.changeCenter(category);
             this.emitter.emit("choseCategory", category);
         },
 
+        // the main category (drink/food) was changed, emit is caught by DrinksTable component
         emitMainCategoryChange(drinkSelected){
           this.drinkSelected = drinkSelected;
           this.emitter.emit("drinkSelected", drinkSelected);
         },
        
+        // run when pay button is clicked, the main page was changed, received by LayoutGrid
         changeCenter(newCenter){
             this.emitter.emit("mainPageChange", newCenter);
         }
