@@ -52,6 +52,8 @@ export default {
 .order{
     background: grey;
     position: relative;
+    width: 100%;
+    max-width: 100%;
 }
 
 .bill{
@@ -83,4 +85,3 @@ export default {
     font-size: 19px;
 }
 </style>
-
