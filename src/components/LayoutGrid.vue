@@ -12,7 +12,6 @@
         <div class="main">
 
           <div v-show="productPageShown" class="product-page page">
-              
               <DrinksTable class="main-table"/>
           </div>
 

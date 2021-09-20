@@ -51,7 +51,7 @@ export default {
     return{
       total: 0,
       drinkSelected: true,
-      // category: beerData,
+      category: beerData,
       // keeping track of selected size
       pickedSize: null
     };
@@ -67,6 +67,7 @@ export default {
 
       // CHOSE DRINK/FOOD
       this.emitter.on("drinkSelected", (drinkSelected) => {
+        console.log("drink is selected" + drinkSelected);
         this.drinkSelected = drinkSelected;
       })
 

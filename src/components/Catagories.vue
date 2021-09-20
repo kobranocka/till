@@ -27,6 +27,7 @@ export default {
 
     data(){
         return{
+          drinkSelected: true
         }
     },
 
@@ -34,17 +35,15 @@ export default {
         emitCategory(category){
             this.changeCenter(category);
             this.emitter.emit("choseCategory", category);
-            console.log("after category emit")
         },
 
         emitMainCategoryChange(drinkSelected){
+          this.drinkSelected = drinkSelected;
           this.emitter.emit("drinkSelected", drinkSelected);
         },
        
         changeCenter(newCenter){
-            console.log("newCenter before")
             this.emitter.emit("mainPageChange", newCenter);
-            console.log("newCenter after");
         }
     }
 
