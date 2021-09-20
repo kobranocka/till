@@ -43,6 +43,3 @@ export default {
 
 </style>
 
-
-
-// THIS IS THE MAIN BRANCH VERSION TO MERGE WITH 

@@ -45,8 +45,3 @@ export default {
         margin: 0.5rem;
     }
 </style>
-
-
-
-
-// THIS IS THE MAIN BRANCH VERSION TO MERGE WITH 

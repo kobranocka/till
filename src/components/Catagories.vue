@@ -1,8 +1,8 @@
 <template>
     <section class="categories">
       
-      <button class="item-type-button" v-on:click="drinkSelected= false">Food</button>
-      <button class="item-type-button" v-on:click="drinkSelected = true">Drink</button>
+      <button class="item-type-button" v-on:click="emitMainCategoryChange(false)">Food</button>
+      <button class="item-type-button" v-on:click="emitMainCategoryChange(true)">Drink</button>
 
       <section v-show="drinkSelected" class="subcatagory drinks">
         <button class="subcatagory-button beer" v-on:click="emitCategory('beer')">Beer</button>
@@ -27,16 +27,18 @@ export default {
 
     data(){
         return{
-            drinkSelected: true
         }
     },
 
     methods:{
         emitCategory(category){
-
             this.changeCenter(category);
             this.emitter.emit("choseCategory", category);
             console.log("after category emit")
+        },
+
+        emitMainCategoryChange(drinkSelected){
+          this.emitter.emit("drinkSelected", drinkSelected);
         },
        
         changeCenter(newCenter){
