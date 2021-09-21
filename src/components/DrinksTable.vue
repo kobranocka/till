@@ -162,7 +162,6 @@ export default {
   grid-template-rows: repeat(14, 1fr);
 }
 
-
 .sizes{
   display: contents;
   grid-column: 1 / span end;

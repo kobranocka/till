@@ -4,6 +4,7 @@
       <button class="item-type-button" v-on:click="emitMainCategoryChange(false)">Food</button>
       <button class="item-type-button" v-on:click="emitMainCategoryChange(true)">Drink</button>
 
+
       <section v-show="drinkSelected" class="subcatagory drinks">
         <button class="subcatagory-button beer" v-on:click="emitCategory('beer')">Beer</button>
         <button class="subcatagory-button wine" v-on:click="emitCategory('wine')">Wine</button>

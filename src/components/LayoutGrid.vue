@@ -23,7 +23,6 @@
 </template>
 
 <script>
-
 import Numpad from './Numpad.vue';
 import HelpBar from './HelpBar.vue';
 import DrinksTable from './DrinksTable.vue';
