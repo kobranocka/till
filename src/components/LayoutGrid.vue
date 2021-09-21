@@ -7,27 +7,22 @@
         </div>
 
         <div class="main">
-
+          <!-- show the items page - DrinksTable component -->
           <div v-show="productPageShown" class="product-page page">
-              
               <DrinksTable class="main-table"/>
           </div>
-
+          <!-- show the items page - PaymentButton component -->
           <div v-show="!productPageShown" class="payment-page page">
               <PaymentButtons class="payments"/>
           </div>
 
-
           <Catagories class="categories"/>
   
         </div>
-
       </div>
 </template>
 
 <script>
-
-
 import Numpad from './Numpad.vue';
 import HelpBar from './HelpBar.vue';
 import DrinksTable from './DrinksTable.vue';
@@ -48,11 +43,13 @@ export default {
 
   data(){
       return{
+        // keep track of the displayed page
         productPageShown: true
       }
   },
 
   mounted(){
+    // emit received from Catagories component when pay button is clicked, change the page display
     this.emitter.on("mainPageChange", page =>{
       if(page == "pay"){
         this.productPageShown = false;

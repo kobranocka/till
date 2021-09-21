@@ -1,13 +1,13 @@
 <template>
   <div class="main-table">
 
-          <SizesPanel class="sizes"/>
+    <!-- The panel with sizes displayed -->
+    <SizesPanel class="sizes"/>
 
-          <span class = "product-item" v-for="item in category.products" :key="item.id"> 
-            <button class = "product-button">{{item.name}}</button>
-          </span> 
-
-
+    <!-- Showing all products from a chosen category as buttons, disabled when it's a drink and size is not selected -->
+    <span class = "product-item" v-for="item in category.products" :key="item.id">
+        <button class = "product-button" :disabled="!item.isEnabled" v-on:click='choseProduct(item)'>{{item.name}}</button>
+    </span>
   </div>
 </template>
 
@@ -15,53 +15,55 @@
 
 import SizesPanel from './SizesPanel.vue';
 
+// loading data from JSON files
 let beerData = require("../assets/beer.json");
 let wineData = require("../assets/wine.json");
 let vodkaData = require("../assets/vodka.json");
 let starterData = require("../assets/starters.json");
 let mainsData = require("../assets/mains.json");
 let dessertData = require("../assets/desserts.json");
-
-let mult = 1;
+// storing drinks together
+let drinksData = [beerData, wineData, vodkaData];
 
 export default {
   name: 'DrinksTable',
-  components: {SizesPanel}
-  ,
-
+  components: {SizesPanel},
   data(){
     return{
+      // keeping track of running total
       total: 0,
-      category: beerData
+      // keeping track of whether the category selected is a drink
+      drinkSelected: true,
+      // keeping track of the current category
+      category: beerData,
+      // keeping track of selected size
+      pickedSize: null
     };
   },
   mounted(){
-    //TEST: on size selected, enable the choice of drinks and count their price by mult
-      this.emitter.on("sizeSelected", (multiply) =>{
-        mult = multiply;
-        // enable drinks
-        this.drinks.forEach(drink => drink.isEnabled = true);
-      });
+    // size has been chosen, received from SizesPanel component
+      this.emitter.on("sizeSelected", (size) =>{
+        // updating the picked size
+        this.pickedSize = size;
+        // disable all items from other drinks categories while size is selected
+        drinksData.forEach(data => data.products.forEach(item => item.isEnabled = false));
+        this.category.products.forEach(item => item.isEnabled = true);
+      })
 
-      this.emitter.on("choseCategory", catagory =>{
-        this.choseCategory(catagory);
-      });
+      // updating the main category (as food or drink) - received from Catagories component
+      this.emitter.on("drinkSelected", (drinkSelected) => {
+        this.drinkSelected = drinkSelected;
+      })
+
+
+      // the subcategory was chosen - received from Categories component
+      this.emitter.on("choseCategory", (category) => {
+        this.choseCategory(category);
+      })
   },
   methods:{
-    updateTotal(item, type){
-      // update item's price field
-      let newItem = JSON.parse(JSON.stringify(item));
-      if(type == 'drink'){
-        newItem.price = newItem.price*mult;
-      }
-      this.total += newItem.price;
-      this.emitter.emit("itemPressed", newItem);
-      // this.drinks.forEach(drink => drink.isEnabled = false);
-
-    },
-
-    choseCategory(cat){
-      
+    // run when subcategory change emit was caught
+    choseCategory(cat){ 
       switch(cat){
         case 'beer':
           this.category = beerData;
@@ -87,9 +89,22 @@ export default {
           this.category = dessertData;
         break;
       }
+      // emit to be caught by SizesPanel to display the right sizes
       this.emitter.emit("category", this.category.sizes);
     },
-
+    // called when an item is clicked
+    choseProduct(chosenProduct){
+      if(this.drinkSelected){
+        // disable all drinks again bc size is not selected anymore
+        this.category.products.forEach(item => item.isEnabled = false);
+        // find the right price of the item
+        chosenProduct.price = chosenProduct.prices[this.pickedSize];
+      }
+      // update total and inform Order component about the changes
+      this.total += chosenProduct.price;
+      // emit to be caught by Order to update the price and display
+      this.emitter.emit("itemPressed", chosenProduct);
+    }
   }
 };
 </script>
@@ -146,7 +161,6 @@ export default {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(14, 1fr);
 }
-
 
 .sizes{
   display: contents;

@@ -1,16 +1,19 @@
 
 {
+    "type":"drink",
     "sizes": "pints",
     "products": [
         {
             "id":1,
-            "price":4,
+            "prices":{"Pint":5, "Half Pint":3, "Shandy":4},
+            "price":5,
             "name":"Heineken",
             "isAlcoholic":true,
             "isEnabled":false
         },
         {
             "id":2,
+            "prices":{"Pint":5, "Half Pint":3, "Shandy":4},
             "price":5,
             "name":"Guinness",
             "isAlcoholic":true,
@@ -18,6 +21,7 @@
         },
         {
             "id":3,
+            "prices":{"Pint":6, "Half Pint":3, "Shandy":4},
             "price":6,
             "name":"Carlsberg",
             "isAlcoholic":true,

@@ -1,22 +1,26 @@
 
 {
+    "type":"food",
     "sizes": "none",
     "products":
         [
             {
                 "id":1,
                 "price":10,
-                "name":"Fish"
+                "name":"Fish",
+                "isEnabled": true
             },
             {
                 "id":2,
                 "price":15,
-                "name":"Steak"
+                "name":"Steak",
+                "isEnabled": true
             },
             {
                 "id":3,
                 "price":3,
-                "name":"Chips"
+                "name":"Chips",
+                "isEnabled": true
             }
         ]
     

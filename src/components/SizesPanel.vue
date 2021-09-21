@@ -9,12 +9,11 @@
 <script>
 
 let sizesChoices = {
-    pints: ["pint", "Half Pint", "Shandy"],
+    pints: ["Pint", "Half Pint", "Shandy"],
     wines: ["125ml", "175ml", "250ml"],
     spirits: ["25ml", "50ml", "Bottle"]
 }
 
-    
 export default {
     name: 'SizesPanel',
     data(){
@@ -24,16 +23,16 @@ export default {
     };
     },
     methods:{
+        // called when size is selected, to be caught by DrinksTable to process the price etc
         sizeSelected(size){
-            this.emitter.emit("sizeSelected", size.mult);
+            this.emitter.emit("sizeSelected", size);
         }
     },
 
     mounted(){
+        // when category is selected, update the displayed sizes options, emitted by DrinksTable component
         this.emitter.on('category', sizeCategory => {
             this.sizes = sizesChoices[sizeCategory];
-            console.table(this.sizes);
-            console.log(sizeCategory);
             });
     }
 }
@@ -58,3 +57,4 @@ export default {
     }
 
 </style>
+

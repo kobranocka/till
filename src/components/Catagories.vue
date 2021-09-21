@@ -1,8 +1,9 @@
 <template>
     <section class="categories">
       
-      <button class="item-type-button" v-on:click="drinkSelected= false">Food</button>
-      <button class="item-type-button" v-on:click="drinkSelected = true">Drink</button>
+      <button class="item-type-button" v-on:click="emitMainCategoryChange(false)">Food</button>
+      <button class="item-type-button" v-on:click="emitMainCategoryChange(true)">Drink</button>
+
 
       <section v-show="drinkSelected" class="subcatagory drinks">
         <button class="subcatagory-button beer" v-on:click="emitCategory('beer')">Beer</button>
@@ -27,22 +28,27 @@ export default {
 
     data(){
         return{
-            drinkSelected: true
+          // keeping track of whether a drink is selected
+          drinkSelected: true
         }
     },
 
     methods:{
+        // the sub-category was changes, emit is caught by DrinksTable component
         emitCategory(category){
-
             this.changeCenter(category);
             this.emitter.emit("choseCategory", category);
-            console.log("after category emit")
+        },
+
+        // the main category (drink/food) was changed, emit is caught by DrinksTable component
+        emitMainCategoryChange(drinkSelected){
+          this.drinkSelected = drinkSelected;
+          this.emitter.emit("drinkSelected", drinkSelected);
         },
        
+        // run when pay button is clicked, the main page was changed, received by LayoutGrid
         changeCenter(newCenter){
-            console.log("newCenter before")
             this.emitter.emit("mainPageChange", newCenter);
-            console.log("newCenter after");
         }
     }
 

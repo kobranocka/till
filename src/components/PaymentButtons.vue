@@ -15,7 +15,6 @@ export default {
   
     };
     },
-    // TEST
     methods:{
         payment(amount, method){
             if(method == "card"){
@@ -26,7 +25,6 @@ export default {
             this.emitter.emit("paymentReceived", amount);
         }
     }
-    // TEST
 }
 
 </script>
@@ -44,5 +42,4 @@ export default {
     button{
         margin: 0.5rem;
     }
-
 </style>
