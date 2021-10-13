@@ -37,6 +37,7 @@
         },
         {
             "id":4,
+            "prices":{"125ml":6, "175ml":5, "250ml":7},
             "price":6,
             "name":"Procecco",
             "isAlcoholic":true,
