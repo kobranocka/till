@@ -38,4 +38,79 @@ export default {
     flex: 2;
     height: 90%;
   }
+
+
+  .button{
+    border: none;
+    border-radius: 12px;
+    color: white;
+    box-shadow: inset -2px -3px 3px rgba(0, 0, 0, 0.589), inset 1px 3px 3px rgba(255, 255, 255, 0.856);
+    margin: 1px;
+  }
+
+  .button > *{
+    color: white;
+    font-weight: bold;
+  }
+
+  .button:tt{
+    background-color: grey !important;
+  }
+
+
+  .button:active{
+    opacity: 0.4;
+  }
+
+
+  .button-1x1{
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+
+  .button-2x1{
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .button-4x4{
+    grid-column: span 4;
+    grid-row: span 4;
+  }
+
+  .b-purple{
+    background-color: purple;
+  }
+
+  .b-lightpurple{
+    background-color: rgb(155, 72, 155);
+  }
+
+  .b-red{
+    background-color: red;
+  }
+  .b-green{
+    background-color: green;
+  }
+  .b-blue{
+    background-color: blue;
+  }
+  .b-darkblue{
+    background-color: darkblue;
+  }
+
+  .b-pink{
+    background-color: pink;
+  }
+
+  .b-yellow{
+    background-color: yellow;
+  }
+
+  .b-orange{
+    background-color: orange;
+  }
+
+
 </style>

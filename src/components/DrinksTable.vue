@@ -5,9 +5,12 @@
     <SizesPanel class="sizes"/>
 
     <!-- Showing all products from a chosen category as buttons, disabled when it's a drink and size is not selected -->
-    <span class = "product-item" v-for="item in category.products" :key="item.id">
+    <span class = "product-item button button-1x1 b-green" v-for="item in category.products" :key="item.id">
         <button class = "product-button" :disabled="!item.isEnabled" v-on:click='choseProduct(item)'>{{item.name}}</button>
     </span>
+
+
+
   </div>
 </template>
 
@@ -46,8 +49,14 @@ export default {
         // updating the picked size
         this.pickedSize = size;
         // disable all items from other drinks categories while size is selected
-        drinksData.forEach(data => data.products.forEach(item => item.isEnabled = false));
-        this.category.products.forEach(item => item.isEnabled = true);
+        drinksData.forEach(data => data.products.forEach(item => {
+        item.isEnabled = false;
+        item.classList.remove("enabled");
+        }));
+        this.category.products.forEach(item => {
+          item.isEnabled = true;
+          item.classList.add("enabled")
+          });
       })
 
       // updating the main category (as food or drink) - received from Catagories component
@@ -129,20 +138,21 @@ export default {
   list-style-type: none;
   max-height: 100%;
   max-width: 100%;
-  grid-row-start: 2;
+  /* grid-row-start: 2; */
 
 }
 
 .product-button{
-  /* width: 30px; */
-  grid-area: 1, 1;
-  /* grid-column: minmax(30px, 1fr);
-  grid-row: minmax(30px, 1fr); */
-  min-width: none;
+
   max-width: 100%;
   max-height: 100%;
   height: 100%;
   width: 100%;
+
+  background-color: transparent;
+  border: none;
+  box-shadow:none;
+
 }
 
 

@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="size in sizes" :key="size.size">
-            <button class = "size-button" v-on:click="sizeSelected(size)">{{size}}</button>
+            <button class = "size-button button b-lightpurple" v-on:click="sizeSelected(size)">{{size}}</button>
         </li>
     </ul>
 </template>
