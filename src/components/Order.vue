@@ -3,7 +3,7 @@
 
       <div class="bill">
           <ul>
-              <li class="bill-item" v-for="item in billItems" :key="item.id"><span class="bill-item-name">{{item.name}}</span><span class="bill-item-price">{{item.price}}</span></li>
+              <li class="bill-item" v-for="item in billItems" :key="item.id"><span class="bill-item-name">{{amount}} {{item.name}}</span><span class="bill-item-price">{{item.price}}</span></li>
           </ul>
       </div>
       <h5 class="total">Total: {{orderTotal}}</h5>
@@ -13,7 +13,7 @@
 <script>
 
 
-
+let amount = 1;
 export default {
     name: 'Order',
     data(){
@@ -22,6 +22,7 @@ export default {
             orderTotal: 0,
             // stacked items
             billItems: [],
+            amount: amount
         }
     },
 
@@ -30,7 +31,7 @@ export default {
         this.emitter.on("itemPressed", (item)=>{
             // create a copy of item and push it to the list
             let copiedItem = Object.assign({}, item);
-            this.orderTotal += copiedItem.price;
+            this.orderTotal += amount * copiedItem.price;
             this.billItems.push(copiedItem);
         })
         // called when payment is made
@@ -46,6 +47,13 @@ export default {
                 this.billItems.push(pay);
             }
         })
+        //test
+        this.emitter.on("amountChosen", (number) => {
+            // do sth with the number
+            this.amount = number
+            this.billItems.push({"name": number})
+        })
+        //test
     },
 }
 </script>
