@@ -1,14 +1,14 @@
 <template>
     <section class="categories">
       
-      <button class="item-type-button" v-on:click="emitMainCategoryChange(false)">Food</button>
-      <button class="item-type-button" v-on:click="emitMainCategoryChange(true)">Drink</button>
+      <button class="item-type-button button button-2x1 b-red" v-on:click="emitMainCategoryChange(false)">Food</button>
+      <button class="item-type-button button button-2x1 b-darkblue" v-on:click="emitMainCategoryChange(true)">Drink</button>
 
 
       <section v-show="drinkSelected" class="subcatagory drinks">
-        <button class="subcatagory-button beer" v-on:click="emitCategory('beer')">Beer</button>
-        <button class="subcatagory-button wine" v-on:click="emitCategory('wine')">Wine</button>
-        <button class="subcatagory-button vodka" v-on:click="emitCategory('vodka')">Vodka</button>
+        <button class="subcatagory-button beer button button-1x1 b-lightpurple" v-on:click="emitCategory('beer')">Beer</button>
+        <button class="subcatagory-button wine button button-1x1 b-lightpurple" v-on:click="emitCategory('wine')">Wine</button>
+        <button class="subcatagory-button vodka button button-1x1 b-lightpurple" v-on:click="emitCategory('vodka')">Vodka</button>
       </section>
 
       <section v-show="!drinkSelected" class="subcatagory food">
@@ -60,7 +60,7 @@ export default {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         grid-template-rows: repeat(14, minmax(0, 1fr));
-        border: dotted red;
+        /* border: dotted red; */
     }
 
     .subcatagory{

@@ -53,8 +53,15 @@ export default {
     font-weight: bold;
   }
 
-  .button:tt{
-    background-color: grey !important;
+  .button:disabled{
+  }
+
+  .button > :disabled{
+        
+        background-color: rgb(131, 131, 131) !important;
+        color: rgba(255, 255, 255, 0.705);
+        box-shadow: inset -2px -3px 3px rgba(0, 0, 0, 0.589), inset 1px 3px 3px rgba(255, 255, 255, 0.856);
+        border-radius: 12px;
   }
 
 

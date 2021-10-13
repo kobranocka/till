@@ -1,9 +1,12 @@
 <template>
     <div class="numpad-wrapper">
-        <table v-for="number in numbers" :key="number">
+
+        <ul class = "numpad-nums">
+        <li v-for="number in numbers" class="button button-1x1 b-green" :key="number">
             <button v-on:click="clickedNumber(number)">{{number}}</button>
-        </table>
-        <button v-on:click="clear">CLEAR</button>
+        </li>
+        </ul>
+        <button class = "button b-pink" v-on:click="clear">Clear quantity</button>
     </div>
 </template>
 
@@ -31,5 +34,21 @@ export default {
 <style scoped>
 .numpad-wrapper{
     border: solid green;
+    display: contents;
+}
+
+.numpad-nums{
+    display: contents;
+}
+
+.numpad-nums li{
+    list-style: none;
+}
+
+.numpad-nums li button{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
 }
 </style>

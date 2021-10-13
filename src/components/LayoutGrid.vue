@@ -69,6 +69,7 @@ export default {
   border: solid 4px gold;
   grid-template-columns: repeat(14, 1fr);
   grid-template-rows: repeat(14, 1fr);
+  background-color: rgb(58, 58, 58);
 }
 
 .left-col{
@@ -81,7 +82,7 @@ export default {
 .main{
   grid-column: 5 / span end;
   grid-row: 1 / span 14;
-  background: blue;
+  /* background: blue; */
   position: relative;
   height:100%;
   display: grid;
@@ -99,7 +100,7 @@ export default {
 .categories{
   grid-column: span 2;
   grid-row: 1 / end;
-  background: orange;
+  /* background: orange; */
 }
 
 .help-bar{

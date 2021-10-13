@@ -51,11 +51,9 @@ export default {
         // disable all items from other drinks categories while size is selected
         drinksData.forEach(data => data.products.forEach(item => {
         item.isEnabled = false;
-        item.classList.remove("enabled");
         }));
         this.category.products.forEach(item => {
           item.isEnabled = true;
-          item.classList.add("enabled")
           });
       })
 
@@ -121,7 +119,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .main-table{
-  background: #e3e3e3;
+  /* background: #e3e3e3; */
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   grid-template-rows: repeat(14, minmax(0, 1fr));
