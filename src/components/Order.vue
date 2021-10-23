@@ -1,9 +1,10 @@
 <template>
   <section class="order">
 
-  <span id = "serverName" class="order-text white">Sean</span>
-  <span id = "dateTime" class=" order-text white">11 Sep 2021 12:02</span>
-
+  <div class="order-top">
+    <span id = "serverName" class="order-text white">Sean</span>
+    <span id = "dateTime" class=" order-text white">11 Sep 2021 12:02</span>
+  </div>
       <div class="bill">
           <ul>
               <li class="bill-item" v-for="item in billItems" :key="item.id">
@@ -13,7 +14,11 @@
               </li>
           </ul>
       </div>
-      <h5 class="total">Total: {{orderTotal}}</h5>
+
+    <div class="order-bottom">
+      <h5 class = "total">Total</h5>
+      <h5 class="total tot-amount">£{{orderTotal}}</h5>
+    </div>
   </section>
 </template>
 
@@ -32,7 +37,7 @@ export default {
     data(){
         return{
             // the running total
-            orderTotal: 0,
+            orderTotal: 0.00,
             // stacked items
             billItems: [],
             amount: amount
@@ -58,7 +63,7 @@ export default {
         this.emitter.on("paymentReceived", (payment)=>{
             // if card/cash payments are made in full or amount is bigger than asking price
             if(payment == "max" || this.orderTotal - payment <= 0){
-                this.orderTotal = 0;
+                this.orderTotal = 0.00;
                 this.billItems.length = 0;
             }else{
                 // if it's a partial payment
@@ -89,7 +94,7 @@ export default {
     position: relative;
     width: 100%;
     max-width: 100%;
-    padding: 4px 7px;
+    padding: 5px 8px;
 }
 
 .bill{
@@ -124,14 +129,28 @@ export default {
     font-size: 13px;
 }
 
+.order-top{
+    position: relative;
+    width: 100%;
+    /* border: solid red; */
+    display: flex;
+}
+
+.order-bottom {
+    display: flex;
+}
+
+.order-bottom .tot-amount{
+    margin-left: auto;
+}
+
 #serverName{
-    border: solid;
+    /* border: solid; */
 }
 
 #dateTime{
-    text-align: right;
     margin-left: auto;
-    border: solid;
+    /* border: solid; */
 }
 
 .white{
