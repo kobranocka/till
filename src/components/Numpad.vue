@@ -1,18 +1,18 @@
 <template>
     <div class="numpad-wrapper">
 
-        <button class="button button-2x1 b-orange" disabled>Clear</button>
+        <button class="button button-2x1 b-orange" v-on:click="clear">Clear</button>
         <button class="button button-2x1 b-blue" disabled>Options</button>
 
 
         <ul class = "numpad-nums">
-        <li v-for="number in numbers" class="button button-1x1 b-green" :key="number">
-            <button v-on:click="clickedNumber(number)">{{number}}</button>
-        </li>
+            <li v-for="number in numbers" class="button button-1x1 b-green" :key="number">
+                <button v-on:click="clickedNumber(number)">{{number}}</button>
+            </li>
         </ul>
 
         <button id = "priceEnquiry" class="button b-red">Price Enquiry</button>
-        <button id = "clearQuantity" class = "button b-pink" v-on:click="clear">Clear quantity</button>
+        <button id = "clearQuantity" class = "button b-pink" v-on:click="clearQuantity">Clear quantity</button>
         <button id = "button0" class="button b-green">0</button>
     </div>
 </template>
@@ -31,7 +31,10 @@ export default {
             this.emitter.emit("amountChosen", number);
         },
         clear(){
-            
+            this.emitter.emit("clear");
+        },
+        clearQuantity(){
+            this.emitter.emit("clearQuantity");
         }
     }
 }
