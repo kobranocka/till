@@ -1,5 +1,5 @@
 <template>
-  <section class="order">
+  <section class="order" v-on:click="orderPressed()">
 
   <div class="order-top">
     <span id = "serverName" class="order-text white">Sean</span>
@@ -31,6 +31,12 @@ export default {
             // stacked items
             billItems: [],
             amount: amount
+        }
+    },
+
+    methods:{
+        orderPressed(){
+            this.emitter.emit("changeToClears");
         }
     },
 
