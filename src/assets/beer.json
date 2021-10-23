@@ -21,7 +21,7 @@
         },
         {
             "id":3,
-            "prices":{"Pint":6, "Half Pint":3, "Shandy":4},
+            "prices":{"Pint":6, "Half Pint":3.5, "Shandy":4},
             "price":6,
             "name":"Carlsberg",
             "isAlcoholic":true,

@@ -6,7 +6,11 @@
 
       <div class="bill">
           <ul>
-              <li class="bill-item" v-for="item in billItems" :key="item.id"><span class="bill-item-name">{{amount}} {{item.name}}</span><span class="bill-item-price">{{item.price}}</span></li>
+              <li class="bill-item" v-for="item in billItems" :key="item.id">
+                    <span class="bill-item-amount">{{item.amount}}</span>
+                    <span class="bill-item-name">{{item.item.name}}</span>
+                    <span class="bill-item-price">{{item.item.price}}</span>
+              </li>
           </ul>
       </div>
       <h5 class="total">Total: {{orderTotal}}</h5>
@@ -15,8 +19,14 @@
 
 <script>
 
+class BilledItem{
+    constructor(amount, item){
+        this.amount = amount;
+        this.item = item;
+    }
+}
 
-let amount = 1;
+let amount = "";
 export default {
     name: 'Order',
     data(){
@@ -34,8 +44,15 @@ export default {
         this.emitter.on("itemPressed", (item)=>{
             // create a copy of item and push it to the list
             let copiedItem = Object.assign({}, item);
-            this.orderTotal += amount * copiedItem.price;
-            this.billItems.push(copiedItem);
+            if(amount != ""){
+                 this.orderTotal += amount * copiedItem.price;
+                 this.billItems[this.billItems.length - 1].item.name = copiedItem.name;
+                 this.billItems[this.billItems.length - 1].item.price = copiedItem.price;
+            }else{
+                this.orderTotal += copiedItem.price;
+                this.billItems.push(new BilledItem(1, copiedItem));
+            }
+            amount = "";
         })
         // called when payment is made
         this.emitter.on("paymentReceived", (payment)=>{
@@ -50,13 +67,16 @@ export default {
                 this.billItems.push(pay);
             }
         })
-        //test
         this.emitter.on("amountChosen", (number) => {
-            // do sth with the number
-            this.amount = number
-            this.billItems.push({"name": number})
+            amount += "" + number
+            if(this.billItems.length > 0 &&
+            this.billItems[this.billItems.length - 1].item.name==""
+            && this.billItems[this.billItems.length - 1].item.price==""){
+                this.billItems[this.billItems.length - 1].amount = amount;
+            }else{
+                this.billItems.push(new BilledItem(amount, {"name":"", "price":""}));
+            }
         })
-        //test
     },
 }
 </script>
