@@ -12,12 +12,12 @@
       </section>
 
       <section v-show="!drinkSelected" class="subcatagory food">
-        <button class="subcatagory-button Starters" v-on:click="emitCategory('starters')">Starters</button>
-        <button class="subcatagory-button Mains" v-on:click="emitCategory('mains')">Mains</button>
-        <button class="subcatagory-button Desserts" v-on:click="emitCategory('desserts')">Desserts</button>
+        <button class="subcatagory-button Starters button button-1x1 b-lightpurple" v-on:click="emitCategory('starters')">Starters</button>
+        <button class="subcatagory-button Mains button button-1x1 b-lightpurple" v-on:click="emitCategory('mains')">Mains</button>
+        <button class="subcatagory-button Desserts button button-1x1 b-lightpurple" v-on:click="emitCategory('desserts')">Desserts</button>
       </section>
 
-      <button v-on:click="changeCenter('pay')" class="payment-button">Pay</button>
+      <button v-on:click="changeCenter('pay')" class="payment-button button button-2x1 b-green">Pay</button>
 
     </section>
 </template>
@@ -73,7 +73,7 @@ export default {
 }
 
 .payment-button{
-  grid-row: end;
+  grid-row: span 2 / end;
   grid-column: span 2;
 }
  

@@ -1,12 +1,19 @@
 <template>
     <div class="numpad-wrapper">
 
+        <button class="button button-2x1 b-orange" disabled>Clear</button>
+        <button class="button button-2x1 b-blue" disabled>Options</button>
+
+
         <ul class = "numpad-nums">
         <li v-for="number in numbers" class="button button-1x1 b-green" :key="number">
             <button v-on:click="clickedNumber(number)">{{number}}</button>
         </li>
         </ul>
-        <button class = "button b-pink" v-on:click="clear">Clear quantity</button>
+
+        <button id = "priceEnquiry" class="button b-red">Price Enquiry</button>
+        <button id = "clearQuantity" class = "button b-pink" v-on:click="clear">Clear quantity</button>
+        <button id = "button0" class="button b-green">0</button>
     </div>
 </template>
 
@@ -38,7 +45,11 @@ export default {
 }
 
 .numpad-nums{
-    display: contents;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column: 1 / 4;
+    grid-row: 10 / span 3;
+    /* background: pink; */
 }
 
 .numpad-nums li{
@@ -50,5 +61,12 @@ export default {
     height: 100%;
     background-color: transparent;
     border: none;
+}
+
+#priceEnquiry{
+    /* grid-column: 4; */
+}
+
+#clearQuantity{
 }
 </style>

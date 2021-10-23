@@ -1,6 +1,9 @@
 <template>
   <section class="order">
 
+  <span id = "serverName" class="order-text white">Sean</span>
+  <span id = "dateTime" class=" order-text white">11 Sep 2021 12:02</span>
+
       <div class="bill">
           <ul>
               <li class="bill-item" v-for="item in billItems" :key="item.id"><span class="bill-item-name">{{amount}} {{item.name}}</span><span class="bill-item-price">{{item.price}}</span></li>
@@ -60,17 +63,19 @@ export default {
 
 <style>
 .order{
-    background: grey;
+    background: rgb(48, 48, 48);
+    border-radius: 12px;
+    box-shadow: inset -2px -3px 2px rgb(71, 71, 71), inset 3px 2px 2px rgb(200, 200, 200);
     position: relative;
     width: 100%;
     max-width: 100%;
+    padding: 4px 7px;
 }
 
 .bill{
     width: 100%;
     height: 90%;
-    border: dotted coral;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .bill-item{
@@ -93,5 +98,27 @@ export default {
     margin: 0;
     color: yellow;
     font-size: 19px;
+}
+
+.order-text{
+    font-size: 13px;
+}
+
+#serverName{
+    border: solid;
+}
+
+#dateTime{
+    text-align: right;
+    margin-left: auto;
+    border: solid;
+}
+
+.white{
+    color: white;
+}
+
+.yellow{
+    color: yellow;
 }
 </style>
