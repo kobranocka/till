@@ -82,6 +82,17 @@ export default {
                 this.billItems.push(new BilledItem(amount, {"name":"", "price":""}));
             }
         })
+        this.emitter.on("clear", ()=>{
+            this.billItems.length = 0;
+            amount = "";
+            this.orderTotal = 0.00;
+        })
+        this.emitter.on("clearQuantity", ()=>{
+            if(amount != ""){
+                amount = "";
+                this.billItems[this.billItems.length - 1].amount = amount;
+            }
+        })
     },
 }
 </script>
